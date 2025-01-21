@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.StringUtil;
 
-@ISubCommandInfo(usage = "/lives add", params = {"add"})
+@ISubCommandInfo(usage = "/lives add <amount> |Bypass|", params = {"add"})
 public class LivesAddCommand extends AbstractSubCommand {
     @Override
     public void onCommand(CommandSender sender, AbstractSuperCommand command, String[] args) {
@@ -44,7 +44,7 @@ public class LivesAddCommand extends AbstractSubCommand {
             int currentLives = liveItem.getCurrentLives() + Integer.parseInt(args[1]);
 
             if (currentLives > maxLives && (args.length == 2 || !args[2].equalsIgnoreCase("bypass"))) {
-                player.sendMessage("That goes above the max lives! Use /lives add '[amount] |Bypass|' to bypass the max live threshold.");
+                player.sendMessage("That goes above the max lives! Use " + getUsageMessage() + " to bypass the max live threshold.");
                 return;
             }
             liveItem.setItemLives(currentLives, maxLives);

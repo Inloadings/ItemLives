@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.regex.Matcher;
 
 
-@ISubCommandInfo(usage = "/lives set [CurrentLives]/[MaxLives]", params = {"set"}, perm = "itemlives.lives.set")
+@ISubCommandInfo(usage = "/lives set <CurrentLives>/<MaxLives>", params = {"set"}, perm = "itemlives.lives.set")
 public class LivesSetCommand extends AbstractSubCommand {
     @Override
     public void onCommand(CommandSender sender, AbstractSuperCommand command, String[] args) {
@@ -38,7 +38,7 @@ public class LivesSetCommand extends AbstractSubCommand {
             int currentLives = Integer.parseInt(livesArray[0]);
             int maxLives = Integer.parseInt(livesArray[1]);
             if (currentLives > maxLives && (args.length == 2 || !args[2].equalsIgnoreCase("bypass"))) {
-                player.sendMessage("That goes above the max lives! Use /lives add '[amount] |Bypass|' to bypass the max live threshold.");
+                player.sendMessage("That goes above the max lives! Use "+ getUsageMessage() + " to bypass the max live threshold.");
                 return;
             }
             liveItem.setItemLives(currentLives, maxLives);

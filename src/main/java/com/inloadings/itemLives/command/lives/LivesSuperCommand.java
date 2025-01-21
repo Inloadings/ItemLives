@@ -12,9 +12,9 @@ import java.util.List;
 @ICommandInfo(name = "lives", description = "asd", usage = {
         "/§8lives\n§2» §7Shows this.",
         "",
-        "/§8lives set [currentLives]/[maxLives] |bypass|\n§2» §7Sets your current and max lives.",
+        "/§8lives set <currentLives>/<maxLives> |bypass|\n§2» §7Sets your current and max lives.",
         "",
-        "/§8lives add [amount] |bypass|\n§2» §7Adds the specified amount of lives to your current total.",
+        "/§8lives add <amount> |bypass|\n§2» §7Adds the specified amount of lives to your current total.",
         "",
         "",
         "§8|bypass|\n§2» §7Addition parameter you can add to live commands to bypass any restrictions"
