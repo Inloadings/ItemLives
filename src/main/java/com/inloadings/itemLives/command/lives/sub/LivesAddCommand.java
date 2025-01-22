@@ -9,13 +9,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.StringUtil;
 
 @ISubCommandInfo(usage = "/lives add <amount> |Bypass|", params = {"add"})
 public class LivesAddCommand extends AbstractSubCommand {
+    public LivesAddCommand(String string) {
+        overrideUsageMessage(string);
+    }
     @Override
     public void onCommand(CommandSender sender, AbstractSuperCommand command, String[] args) {
-        sender.sendMessage("started");
         if (args.length != 2 && args.length != 3) {
             sender.sendMessage(getUsageMessage());
             return;

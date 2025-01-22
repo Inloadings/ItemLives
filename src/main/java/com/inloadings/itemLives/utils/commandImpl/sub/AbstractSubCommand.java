@@ -5,8 +5,7 @@ import org.bukkit.command.CommandSender;
 
 public abstract class AbstractSubCommand {
     ISubCommandInfo subCommandInfo = getClass().getAnnotation(ISubCommandInfo.class);
-
-
+    String usage = subCommandInfo.usage();
 
     public String getRequiredPermission() {
         return subCommandInfo.perm();
@@ -14,8 +13,13 @@ public abstract class AbstractSubCommand {
     public String[] getSubCommandNames() {
         return subCommandInfo.params();
     }
+
+    public void overrideUsageMessage(String usageMessage) {
+        usage = usageMessage;
+    }
+
     public String getUsageMessage() {
-        return subCommandInfo.usage();
+        return usage;
     }
 
     public void attemptCommand(CommandSender sender, AbstractSuperCommand command, String[] args) {

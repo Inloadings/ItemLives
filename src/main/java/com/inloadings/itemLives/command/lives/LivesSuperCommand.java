@@ -1,31 +1,33 @@
 package com.inloadings.itemLives.command.lives;
 
 import com.inloadings.itemLives.command.lives.sub.LivesAddCommand;
+import com.inloadings.itemLives.command.lives.sub.LivesReloadCommand;
 import com.inloadings.itemLives.command.lives.sub.LivesSetCommand;
 import com.inloadings.itemLives.utils.commandImpl.Super.AbstractSuperCommand;
 import com.inloadings.itemLives.utils.commandImpl.Super.ICommandInfo;
 import com.inloadings.itemLives.utils.commandImpl.sub.AbstractSubCommand;
+import com.inloadings.itemLives.utils.config.ConfigManager;
+import com.inloadings.itemLives.utils.config.ConfigPath;
+import com.inloadings.itemLives.utils.config.ConfigurationFile;
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-@ICommandInfo(name = "lives", description = "asd", usage = {
-        "/§8lives\n§2» §7Shows this.",
-        "",
-        "/§8lives set <currentLives>/<maxLives> |bypass|\n§2» §7Sets your current and max lives.",
-        "",
-        "/§8lives add <amount> |bypass|\n§2» §7Adds the specified amount of lives to your current total.",
-        "",
-        "",
-        "§8|bypass|\n§2» §7Addition parameter you can add to live commands to bypass any restrictions"
-})
+
+@ICommandInfo(name = "lives", description = "asd", usage = {})
 public class LivesSuperCommand extends AbstractSuperCommand {
-    public LivesSuperCommand(@NotNull String name) {
-        super(name);
+    public LivesSuperCommand(@NotNull String name, JavaPlugin plugin) {
+        super(name, plugin);
+        overrideUsageMessage(ConfigManager.getValue(ConfigurationFile.MESSAGES, ConfigPath.LIVES_USAGE));
     }
     @Override
     protected List<AbstractSubCommand> initializeSubCommands() {
-        return List.of(new LivesSetCommand(), new LivesAddCommand());
+        return List.of(
+                new LivesSetCommand(ConfigManager.getValue(ConfigurationFile.MESSAGES, ConfigPath.LIVES_SET_USAGE)),
+                new LivesAddCommand(ConfigManager.getValue(ConfigurationFile.MESSAGES, ConfigPath.LIVES_ADD_USAGE)),
+                new LivesReloadCommand(getPlugin())
+        );
     }
 
     @Override

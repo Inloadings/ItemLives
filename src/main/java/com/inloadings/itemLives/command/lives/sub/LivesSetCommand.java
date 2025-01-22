@@ -9,14 +9,14 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.regex.Matcher;
-
 
 @ISubCommandInfo(usage = "/lives set <CurrentLives>/<MaxLives>", params = {"set"}, perm = "itemlives.lives.set")
 public class LivesSetCommand extends AbstractSubCommand {
+    public LivesSetCommand(String string) {
+        overrideUsageMessage(string);
+    }
     @Override
     public void onCommand(CommandSender sender, AbstractSuperCommand command, String[] args) {
-        sender.sendMessage("started");
         CommandUtil.checkPlayer(sender).ifPresent(player -> {
 
             if (args.length != 2 && args.length != 3) {
